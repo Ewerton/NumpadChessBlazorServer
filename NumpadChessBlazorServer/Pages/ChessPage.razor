@@ -1,0 +1,37 @@
+﻿@page "/chess-page"
+@using NumpadChessBlazorServer.Pages.Components
+@layout MainLayout
+
+<PageTitle>Chess Counter</PageTitle>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h1>Chess Board</h1>
+            <p>Just an example on how easy is to extend/adapt the code to work with different boards and pieces.</p>
+        </div>
+
+        <div class="col-12">
+            <table class="board">
+                @for (var row = 0; row < board?.RowCount; row++)
+                {
+                    <tr>
+                        @for (var col = 0; col < board.ColCount; col++)
+                        {
+                            var isWhite = (row + col) % 2 == 0;
+                            var cellClass = isWhite ? "white" : "black";
+
+                            <td class="@cellClass">
+                                <CmpChessPiece Square="@board[row, col]"></CmpChessPiece>
+                            </td>
+                        }
+                    </tr>
+                }
+
+            </table>
+        </div>
+
+    </div>
+</div>
+
+

@@ -1,0 +1,104 @@
+﻿@page "/"
+@using ChessLib.Pieces;
+@using ChessLib.Pieces.Chess;
+@using NumpadChessBlazorServer.Pages.Components
+@layout MainLayout
+
+<PageTitle>Numpad Chess Counter</PageTitle>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h1>Chess On Numpad </h1>
+            <p>This App discovers how many unique phone number can be discovered by moving on the numpad using Chess pieces movements.</p>
+            <p>You cannot start at the * or the #.</p>
+            <p>You cannot start at zero or one.</p>
+        </div>
+
+        <div class="col-4">
+            <div class="container numpad g-0">
+                @for (var row = 0; row < board?.RowCount; row++)
+                {
+                    <div class="row g-0">
+
+                        @for (var col = 0; col < board.ColCount; col++)
+                        {
+                            <div class="col-4 d-flex justify-content-center">
+                                <CmpNumpadButton Square="@board[row, col]" SquareClicked="@NumpadSquareClicked"></CmpNumpadButton>
+                            </div>
+                        }
+                    </div>
+                }
+            </div>
+
+
+        </div>
+
+        <div class="col-8">
+            <EditForm EditContext="@EditContext">
+
+                <div class="row">
+                    <div class="col-4">
+                        <div class="mb-3">
+                            <label id="pieceType" for="selectPiece" class="form-label">Select a chess piece</label>
+                            <InputSelect TValue=@(ChessPieceType) Value="@SelectedChessPieceType" ValueExpression="@(() => SelectedChessPieceType)" ValueChanged="@(ChessPieceTypeChanged)" class="form-select form-select-lg" id="selectPiece" aria-label=".form-select-lg selectPiece">
+                                @foreach (var piece in Enum.GetValues(typeof(ChessPieceType)))
+                                {
+                                    <option value="@piece">@piece</option>
+                                }
+                            </InputSelect>
+                            <div id="pieceType" class="form-text">Click on the num pad to select the initial position</div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-4">
+                        <div class="mb-3">
+                            <label for="startPosition" class="form-label">Initial Position</label>
+                            <InputText @bind-Value="@CoordinatesText" class="form-control form-control-lg" id="startPosition" aria-describedby="startPosition" disabled />
+                            <div id="startPosition" class="form-text">Click on the num pad to select the initial position</div>
+                        </div>
+                    </div>
+
+                    <div class="col-4">
+                        <div class="mb-3">
+                            <label for="phoneNumberLenght" class="form-label">Phone Number Lenght</label>
+                            <InputNumber @bind-Value="@PhoneNumberLenght" class="form-control form-control-lg" id="phoneNumberLenght" aria-describedby="phoneNumberLenghtHelp" disabled />
+                            <div id="phoneNumberLenghtHelp" class="form-text">Phone number lenght </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary" @onclick="@Run">Run</button>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    @*  <textarea class="form-control form-control-lg" id="exampleFormControlTextarea1" rows="15" disabled readonly>@GameLog</textarea> *@
+                    <InputTextArea @bind-Value="@GameLog" class="form-control form-control-lg" id="exampleFormControlTextarea1" rows="15" disabled readonly />
+                </div>
+            </EditForm>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Warning</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                @ModalMessage
+            </div>
+            @*  <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+            </div> *@
+        </div>
+    </div>
+</div>

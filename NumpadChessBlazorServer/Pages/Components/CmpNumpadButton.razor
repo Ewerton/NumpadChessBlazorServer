@@ -1,0 +1,36 @@
+﻿@if (Square != null)
+{
+    <div class="key d-flex justify-content-center align-items-center" @onclick="@Clicked">
+        <div class="">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        @if (Piece != null)
+                        {
+                            <img class="card-img-top" src="@(Piece.ImageUrl)" />
+                        }
+                        else
+                        {
+                            <img class="card-img-top" src="/images/Transparent64x64.png" />
+                        }
+                        <span class="card-img-overlay">@Square.Text</span>
+                    </div>
+                </div>
+            </div>
+            @if (Debug)
+            {
+                <div class="row">
+                    <div class="col-12">
+                        <div class="xx">
+                            <span class="debugText">
+                                (@Square.Coordinates.Row, @Square.Coordinates.Col)
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+}
+
