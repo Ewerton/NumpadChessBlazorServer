@@ -18,7 +18,7 @@ Here are the results achieved for a 7 digits number, for all chess pieces:
 |7|136|
 |8|104|
 |9|136|
-|Total |952|
+|**Total** |**952**|
 
 ## Bishop
 
@@ -32,7 +32,7 @@ Here are the results achieved for a 7 digits number, for all chess pieces:
 |7|508|
 |8|64|
 |9|508|
-|Total |2341|
+|**Total**|**2341**|
 
 ## Rook
 
@@ -46,14 +46,14 @@ Here are the results achieved for a 7 digits number, for all chess pieces:
 |7|5595|
 |8|7117|
 |9|5595|
-|Total |49726|
+|**Total**|**49726**|
 
 ## Pawn
 
 |Starting from|combinations|
 |-------------|----------------------|
 |any number|0|
-|Total |0|
+|**Total**|**0**|
 
 ## Queen
 
@@ -67,7 +67,7 @@ Here are the results achieved for a 7 digits number, for all chess pieces:
 |7|94740|
 |8|95901|
 |9|94740|
-|Total |751503|
+|**Total**|**751503**|
 
 ## King
 
@@ -81,7 +81,7 @@ Here are the results achieved for a 7 digits number, for all chess pieces:
 |7|13138|
 |8|17977|
 |9|13138|
-|Total |124908|
+|**Total**|**124908**|
 
 
 
