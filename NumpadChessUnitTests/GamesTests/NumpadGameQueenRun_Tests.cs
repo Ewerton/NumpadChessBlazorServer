@@ -11,10 +11,10 @@ using System.Threading.Tasks;
 
 namespace NumpadChessUnitTests.GamesTests
 {
-    public class NumpadGameKnightRun_Tests
+    public class NumpadGameQueenRun_Tests
     {
         private int phoneNumberSize = 7;
-        private ChessPieceType pieceType = ChessPieceType.Knight; 
+        private ChessPieceType pieceType = ChessPieceType.Queen;
 
         [Test]
         public void DiscoveredNumbersStartingAt2()
@@ -22,14 +22,14 @@ namespace NumpadChessUnitTests.GamesTests
             // Arrange
             Coordinates2D startingPoint = new Coordinates2D(0, 1);
             var gameBoard = new NumpadBoard();
-            gameBoard.board[startingPoint.Row, startingPoint.Col].SquareContent = new Knight(ChessPieceColor.White);
+            gameBoard.board[startingPoint.Row, startingPoint.Col].SquareContent = new Queen(ChessPieceColor.White);
             var numpadGame = new NumpadChessGame(gameBoard);
 
             // Act
             var result = numpadGame.GetUniquePhoneNumbers(pieceType, startingPoint, phoneNumberSize);
 
             // Assert
-            Assert.That(result.Count, Is.EqualTo(104));
+            Assert.That(result.Count, Is.EqualTo(93279));
         }
 
         [Test]
@@ -38,14 +38,14 @@ namespace NumpadChessUnitTests.GamesTests
             // Arrange
             Coordinates2D startingPoint = new Coordinates2D(0, 2);
             var gameBoard = new NumpadBoard();
-            gameBoard.board[startingPoint.Row, startingPoint.Col].SquareContent = new Knight(ChessPieceColor.White);
+            gameBoard.board[startingPoint.Row, startingPoint.Col].SquareContent = new Queen(ChessPieceColor.White);
             var numpadGame = new NumpadChessGame(gameBoard);
 
             // Act
             var result = numpadGame.GetUniquePhoneNumbers(pieceType, startingPoint, phoneNumberSize);
 
             // Assert
-            Assert.That(result.Count, Is.EqualTo(136));
+            Assert.That(result.Count, Is.EqualTo(84898));
         }
 
         [Test]
@@ -54,14 +54,14 @@ namespace NumpadChessUnitTests.GamesTests
             // Arrange
             Coordinates2D startingPoint = new Coordinates2D(1, 0);
             var gameBoard = new NumpadBoard();
-            gameBoard.board[startingPoint.Row, startingPoint.Col].SquareContent = new Knight(ChessPieceColor.White);
+            gameBoard.board[startingPoint.Row, startingPoint.Col].SquareContent = new Queen(ChessPieceColor.White);
             var numpadGame = new NumpadChessGame(gameBoard);
 
             // Act
             var result = numpadGame.GetUniquePhoneNumbers(pieceType, startingPoint, phoneNumberSize);
 
             // Assert
-            Assert.That(result.Count, Is.EqualTo(168));
+            Assert.That(result.Count, Is.EqualTo(85048));
         }
 
         [Test]
@@ -70,14 +70,14 @@ namespace NumpadChessUnitTests.GamesTests
             // Arrange
             Coordinates2D startingPoint = new Coordinates2D(1, 1);
             var gameBoard = new NumpadBoard();
-            gameBoard.board[startingPoint.Row, startingPoint.Col].SquareContent = new Knight(ChessPieceColor.White);
+            gameBoard.board[startingPoint.Row, startingPoint.Col].SquareContent = new Queen(ChessPieceColor.White);
             var numpadGame = new NumpadChessGame(gameBoard);
 
             // Act
             var result = numpadGame.GetUniquePhoneNumbers(pieceType, startingPoint, phoneNumberSize);
 
             // Assert
-            Assert.That(result.Count, Is.EqualTo(0));
+            Assert.That(result.Count, Is.EqualTo(117849));
         }
 
         [Test]
@@ -86,14 +86,14 @@ namespace NumpadChessUnitTests.GamesTests
             // Arrange
             Coordinates2D startingPoint = new Coordinates2D(1, 2);
             var gameBoard = new NumpadBoard();
-            gameBoard.board[startingPoint.Row, startingPoint.Col].SquareContent = new Knight(ChessPieceColor.White);
+            gameBoard.board[startingPoint.Row, startingPoint.Col].SquareContent = new Queen(ChessPieceColor.White);
             var numpadGame = new NumpadChessGame(gameBoard);
 
             // Act
             var result = numpadGame.GetUniquePhoneNumbers(pieceType, startingPoint, phoneNumberSize);
 
             // Assert
-            Assert.That(result.Count, Is.EqualTo(168));
+            Assert.That(result.Count, Is.EqualTo(85048));
         }
 
         [Test]
@@ -102,14 +102,14 @@ namespace NumpadChessUnitTests.GamesTests
             // Arrange
             Coordinates2D startingPoint = new Coordinates2D(2, 0);
             var gameBoard = new NumpadBoard();
-            gameBoard.board[startingPoint.Row, startingPoint.Col].SquareContent = new Knight(ChessPieceColor.White);
+            gameBoard.board[startingPoint.Row, startingPoint.Col].SquareContent = new Queen(ChessPieceColor.White);
             var numpadGame = new NumpadChessGame(gameBoard);
 
             // Act
             var result = numpadGame.GetUniquePhoneNumbers(pieceType, startingPoint, phoneNumberSize);
 
             // Assert
-            Assert.That(result.Count, Is.EqualTo(136));
+            Assert.That(result.Count, Is.EqualTo(94740));
         }
 
         [Test]
@@ -118,14 +118,14 @@ namespace NumpadChessUnitTests.GamesTests
             // Arrange
             Coordinates2D startingPoint = new Coordinates2D(2, 1);
             var gameBoard = new NumpadBoard();
-            gameBoard.board[startingPoint.Row, startingPoint.Col].SquareContent = new Knight(ChessPieceColor.White);
+            gameBoard.board[startingPoint.Row, startingPoint.Col].SquareContent = new Queen(ChessPieceColor.White);
             var numpadGame = new NumpadChessGame(gameBoard);
 
             // Act
             var result = numpadGame.GetUniquePhoneNumbers(pieceType, startingPoint, phoneNumberSize);
 
             // Assert
-            Assert.That(result.Count, Is.EqualTo(104));
+            Assert.That(result.Count, Is.EqualTo(95901));
         }
 
         [Test]
@@ -134,14 +134,14 @@ namespace NumpadChessUnitTests.GamesTests
             // Arrange
             Coordinates2D startingPoint = new Coordinates2D(2, 2);
             var gameBoard = new NumpadBoard();
-            gameBoard.board[startingPoint.Row, startingPoint.Col].SquareContent = new Knight(ChessPieceColor.White);
+            gameBoard.board[startingPoint.Row, startingPoint.Col].SquareContent = new Queen(ChessPieceColor.White);
             var numpadGame = new NumpadChessGame(gameBoard);
 
             // Act
             var result = numpadGame.GetUniquePhoneNumbers(pieceType, startingPoint, phoneNumberSize);
 
             // Assert
-            Assert.That(result.Count, Is.EqualTo(136));
+            Assert.That(result.Count, Is.EqualTo(94740));
         }
     }
 }

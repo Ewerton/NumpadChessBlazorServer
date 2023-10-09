@@ -17,7 +17,6 @@ namespace NumpadChessUnitTests.BoardsTests
 
             // Act
 
-
             // Assert
             Assert.That(numpadBoard.RowCount, Is.EqualTo(4));
             Assert.That(numpadBoard.ColCount, Is.EqualTo(3));
