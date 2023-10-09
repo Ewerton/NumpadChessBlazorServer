@@ -8,8 +8,8 @@ This program discovers all the possible *n* digit numbers that can be made from 
 Here are the results achieved for a 7 digits number, for all chess pieces:
 ## Knight
 
-|Starting from|combinations|
-|-------------|----------------------|
+|Starting from|Combinations|
+|:-------------:|----------------------:|
 |2|104|
 |3|136|
 |4|168|
@@ -22,8 +22,8 @@ Here are the results achieved for a 7 digits number, for all chess pieces:
 
 ## Bishop
 
-|Starting from|combinations|
-|-------------|----------------------|
+|Starting from|Combinations|
+|:-------------:|----------------------:|
 |2|64|
 |3|415|
 |4|64|
@@ -36,8 +36,8 @@ Here are the results achieved for a 7 digits number, for all chess pieces:
 
 ## Rook
 
-|Starting from|combinations|
-|-------------|----------------------|
+|Starting from|Combinations|
+|:-------------:|----------------------:|
 |2|7117|
 |3|5995|
 |4|5595|
@@ -50,15 +50,15 @@ Here are the results achieved for a 7 digits number, for all chess pieces:
 
 ## Pawn
 
-|Starting from|combinations|
-|-------------|----------------------|
+|Starting from|Combinations|
+|:-------------:|----------------------:|
 |any number|0|
 |**Total**|**0**|
 
 ## Queen
 
-|Starting from|combinations|
-|-------------|----------------------|
+|Starting from|Combinations|
+|:-------------:|----------------------:|
 |2|93279|
 |3|84898|
 |4|85048|
@@ -71,8 +71,8 @@ Here are the results achieved for a 7 digits number, for all chess pieces:
 
 ## King
 
-|Starting from|combinations|
-|-------------|----------------------|
+|Starting from|Combinations|
+|:-------------:|----------------------:|
 |2|15265|
 |3|10811|
 |4|15984|
