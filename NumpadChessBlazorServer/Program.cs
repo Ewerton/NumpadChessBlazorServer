@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
-using NumpadChessBlazorServer.Data;
 
 namespace NumpadChessBlazorServer
 {
@@ -12,11 +11,7 @@ namespace NumpadChessBlazorServer
 
             // Add services to the container.
             builder.Services.AddRazorPages();
-            builder.Services.AddServerSideBlazor(opt =>
-            {
-                opt.DisconnectedCircuitRetentionPeriod = TimeSpan.FromHours(1);
-            });
-            builder.Services.AddSingleton<WeatherForecastService>();
+            builder.Services.AddServerSideBlazor();
 
             var app = builder.Build();
 
@@ -31,13 +26,7 @@ namespace NumpadChessBlazorServer
 
             app.UseRouting();
 
-            //app.MapBlazorHub();
-            app.MapBlazorHub(opt =>
-            {
-                opt.WebSockets.CloseTimeout = TimeSpan.FromHours(1);
-                opt.LongPolling.PollTimeout = TimeSpan.FromHours(1);
-                opt.TransportSendTimeout = TimeSpan.FromHours(1);
-            });
+            app.MapBlazorHub();
 
             app.MapFallbackToPage("/_Host");
 

@@ -12,6 +12,7 @@ using Microsoft.JSInterop;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Xml.Linq;
 
 namespace NumpadChessBlazorServer.Pages
@@ -46,15 +47,23 @@ namespace NumpadChessBlazorServer.Pages
         private EditContext EditContext;
 
         private string GameLog { get; set; }
+
+        private bool BtnRunDisabled { get; set; } = false;
+        private string BtnRunText { get; set; } = "Run";
+
+        System.Timers.Timer TimerUpdateGameLog = new System.Timers.Timer();
+
+        string strGameLogTemp = String.Empty;
         protected override async Task OnInitializedAsync()
         {
             try
             {
                 InitializeBoardAsync();
 
+                ConfigureTimerUpdateGameLog();
+
                 SelectedChessPieceType = ChessPieceType.Knight; // default piece type, just for testing
                 PutPieceOnSquare(StartingPoint, SelectedChessPieceType);
-
                 EditContext = new EditContext(new object());
                 await base.OnInitializedAsync();
             }
@@ -64,10 +73,79 @@ namespace NumpadChessBlazorServer.Pages
             }
         }
 
+
+
         private void InitializeBoardAsync()
         {
             board = GenericBoardFactory.CreateBoardOf<NumpadBoardSquare>();
         }
+
+        private async void Run()
+        {
+            try
+            {
+                if (SelectedChessPieceType == null)
+                {
+                    await ShowModal("Please, select a chess piece.");
+                    return;
+                }
+
+                if (StartingPoint == null)
+                {
+                    await ShowModal("Please, click at the numpad to select a starting point.");
+                    return;
+                }
+
+                if (PhoneNumberLenght <= 0)
+                {
+                    await ShowModal("Please, enter a valid lenght for the phone number.");
+                    return;
+                }
+
+                BtnRunDisabled = true;
+                BtnRunText = "Running...";
+                await ClearGameLog();
+
+
+                NumpadBoard gameBoard = board as NumpadBoard;
+                NumpadChessGame game = new NumpadChessGame(gameBoard);
+
+                await UpdateGameLog($"Starting game at number {gameBoard[StartingPoint.Row, StartingPoint.Col].Text} (row:{StartingPoint.Row}, col:{StartingPoint.Col}) for {SelectedChessPieceType.ToString()} piece ...");
+                await ScrollToGameLogTop();
+
+
+                // Event handler to update the game log
+                game.OnNewNumberDiscovered += async (sender, newNumber) =>
+                {
+                    strGameLogTemp = strGameLogTemp + $"New number discovered: {newNumber}" + Environment.NewLine;
+                };
+
+                // Calls the recursive method to find the phone numbers
+                List<string> discoveredPhoneNumbers = await Task.Run(() => game.GetUniquePhoneNumbers(SelectedChessPieceType, StartingPoint, PhoneNumberLenght));
+
+                string endingMessge = String.Empty;
+
+                if (discoveredPhoneNumbers.Count > 0)
+                    endingMessge = $"Game finished. {discoveredPhoneNumbers.Count} unique phone numbers found.";
+                else
+                    endingMessge = $"Game finished. No unique phone numbers found.";
+
+                await UpdateGameLog(endingMessge);
+                await ShowModal(endingMessge);
+                await ScrollToGameLogBottom();
+            }
+            catch (Exception ex)
+            {
+                await ShowModal(ex.Message);
+            }
+            finally
+            {
+                BtnRunDisabled = false;
+                BtnRunText = "Run";
+                StateHasChanged();
+            }
+        }
+
 
         private void ChessPieceTypeChanged(ChessPieceType pieceType)
         {
@@ -122,65 +200,53 @@ namespace NumpadChessBlazorServer.Pages
             await JSRuntime.InvokeVoidAsync("ShowModal", "exampleModal");
         }
 
-        private async void Run()
+        private async Task UpdateGameLog(string str)
         {
-            try
-            {
-                if (SelectedChessPieceType == null)
-                {
-                    await ShowModal("Please, select a chess piece.");
-                    return;
-                }
-
-                if (StartingPoint == null)
-                {
-                    await ShowModal("Please, click at the numpad to select a starting point.");
-                    return;
-                }
-
-                if (PhoneNumberLenght <= 0)
-                {
-                    await ShowModal("Please, enter a valid lenght for the phone number.");
-                    return;
-                }
-
-                GameLog = String.Empty;
-                NumpadBoard gameBoard = board as NumpadBoard;
-                NumpadChessGame game = new NumpadChessGame(gameBoard);
-
-                game.NewNumberDiscovered += Game_NewNumberDiscovered;
-
-                await UpdateGameLog($"Starting game at number {gameBoard[StartingPoint.Row, StartingPoint.Col].Text} (row:{StartingPoint.Row}, col:{StartingPoint.Col}) for {SelectedChessPieceType.ToString()} piece ...");
-
-                // Calls the recursive method to find the phone numbers
-                List<string> discoveredPhoneNumbers = game.GetUniquePhoneNumbers(SelectedChessPieceType, StartingPoint, PhoneNumberLenght);
-
-                string endingMessge = "Game finished.";
-                
-                if (discoveredPhoneNumbers.Count > 0)
-                    endingMessge = $"Game finished. {discoveredPhoneNumbers.Count} unique phone numbers found.";
-                else
-                    endingMessge = $"Game finished. No unique phone numbers found.";
-                
-                await UpdateGameLog(endingMessge);
-                await ShowModal(endingMessge);
-            }
-            catch (Exception ex)
-            {
-                await ShowModal(ex.Message);
-            }
-        }
-
-
-        private void Game_NewNumberDiscovered(object? sender, string newNumber)
-        {
-            Task.Run(async () => await UpdateGameLog(newNumber));
-        }
-
-        private async Task UpdateGameLog(string newNumber)
-        {
-            GameLog = GameLog + newNumber + Environment.NewLine;
+            GameLog = GameLog + str + Environment.NewLine;
             StateHasChanged();
+        }
+
+        private async Task ClearGameLog()
+        {
+            GameLog = String.Empty;
+            strGameLogTemp = String.Empty;
+            StateHasChanged();
+        }
+
+        private async Task ScrollToGameLogBottom()
+        {
+            await JSRuntime.InvokeVoidAsync("ScrollToBottom", "gameLogTextArea");
+        }
+
+        private async Task ScrollToGameLogTop()
+        {
+            await JSRuntime.InvokeVoidAsync("ScrollToTop", "gameLogTextArea");
+        }
+
+        private void ConfigureTimerUpdateGameLog()
+        {
+            TimerUpdateGameLog.Interval = TimeSpan.FromSeconds(1).TotalMilliseconds;
+            TimerUpdateGameLog.Elapsed += TimerUpdateGameLog_Elapsed;
+            TimerUpdateGameLog.Start();
+        }
+
+        private async Task ReplaceGameLog(string str)
+        {
+            GameLog = str;
+            StateHasChanged();
+        }
+
+        private void TimerUpdateGameLog_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            // Updates the UI only each second to avoid Task canceled exceptions
+            Task.Run(async () =>
+            {
+                await InvokeAsync(async () =>
+                {
+                    await ReplaceGameLog(strGameLogTemp);
+                    await ScrollToGameLogBottom();
+                });
+            });
         }
     }
 }

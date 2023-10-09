@@ -16,14 +16,12 @@ namespace ChessLib.Boards.Squares
         {
             Coordinates.Row = row;
             Coordinates.Col = col;
-            //SquareContent = squareContent;
         }
 
         public BaseBoardSquare(Coordinates2D coord)
         {
             Coordinates.Row = coord.Row;
             Coordinates.Col = coord.Col;
-            //SquareContent = squareContent;
         }
 
         public override string ToString()

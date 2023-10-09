@@ -3,6 +3,7 @@ using ChessLib.Boards.Numpad;
 using ChessLib.Pieces.Chess;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,19 +12,16 @@ namespace ChessLib.Games
 {
     public class NumpadChessGame
     {
-        public event EventHandler<string> NewNumberDiscovered;
+        public event EventHandler<string> OnNewNumberDiscovered;
 
-        private NumpadBoard GameBoard { get; set; }
+        public readonly NumpadBoard GameBoard;// { get; set; }
 
-        private ChessPiece? SelectedChessPiece { get; set; }
-
-        //private List<Coordinates2D> VisitedCoordinates { get; set; } = new List<Coordinates2D>();
-
-        private Dictionary<string, Coordinates2D> Visited { get; set; } = new Dictionary<string, Coordinates2D>();
+        public ChessPiece? SelectedChessPiece { get; private set; }
+        public int PhoneNumberSize  { get; private set; }
 
         List<string> PhoneNumbers = new List<string>();
 
-        private int PhoneNumberSize { get; set; }
+
         public NumpadChessGame(NumpadBoard gameBoard)
         {
             if (gameBoard == null)
@@ -33,13 +31,12 @@ namespace ChessLib.Games
                 throw new Exception("No piece on the board. Please put a piece on the board first.");
 
             GameBoard = gameBoard;
-            Visited = new();
         }
 
         public List<string> GetUniquePhoneNumbers(ChessPieceType chessPieceType, Coordinates2D startingPoint, int phoneNumberSize)
         {
             if (!AreCoordinatesWithinBoard(startingPoint))
-                throw new Exception("Starting point is outside the board.");
+                throw new ArgumentException("Starting point is outside the board.");
 
             if (AreCoordinatesAtInvalidPosition(startingPoint))
                 throw new Exception("Starting point is in an invalid position.");
@@ -48,14 +45,10 @@ namespace ChessLib.Games
                 throw new Exception("Phone number cannot start with zero or one.");
 
             if (phoneNumberSize <= 0)
-                throw new Exception("Phone number size must be greater than zero.");
+                throw new ArgumentException("Phone number size must be greater than zero.");
 
             PhoneNumberSize = phoneNumberSize;
             SelectedChessPiece = ChessPieceFactory.CreateChessPiece(chessPieceType, ChessPieceColor.White);
-            //Visited = new();
-
-            //The starting point is the first visited coordinate
-            //Visited.Add(GameBoard[startingPoint.Row, startingPoint.Col].Text, startingPoint);
 
             PhoneNumbers = new List<string>();
 
@@ -74,7 +67,7 @@ namespace ChessLib.Games
                 if (!PhoneNumbers.Contains(currentNumber))
                 {
                     PhoneNumbers.Add(currentNumber);
-                    NewNumberDiscovered?.Invoke(this, currentNumber);
+                    OnNewNumberDiscovered?.Invoke(this, currentNumber);
                     return;
                 }
             }

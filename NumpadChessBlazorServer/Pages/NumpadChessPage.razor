@@ -71,13 +71,13 @@
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        <button type="submit" class="btn btn-primary" @onclick="@Run">Run</button>
+                        <button type="submit" class="btn btn-primary" @onclick="@Run" disabled=@BtnRunDisabled>@BtnRunText</button>
                     </div>
                 </div>
 
                 <div class="col-12">
                     @*  <textarea class="form-control form-control-lg" id="exampleFormControlTextarea1" rows="15" disabled readonly>@GameLog</textarea> *@
-                    <InputTextArea @bind-Value="@GameLog" class="form-control form-control-lg" id="exampleFormControlTextarea1" rows="15" disabled readonly />
+                    <InputTextArea  id="gameLogTextArea" @bind-Value="@GameLog" class="form-control form-control-lg" rows="15" disabled readonly />
                 </div>
             </EditForm>
         </div>

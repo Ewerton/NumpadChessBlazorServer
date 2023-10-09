@@ -25,6 +25,10 @@ namespace ChessLib.Pieces.Chess
             possibleMoves.Add(new Coordinates2D(0, -1)); // One column left
             possibleMoves.Add(new Coordinates2D(1, 0)); // One row up
             possibleMoves.Add(new Coordinates2D(-1, 0)); // One row down
+            possibleMoves.Add(new Coordinates2D(1, 1)); // One row up, one column right
+            possibleMoves.Add(new Coordinates2D(1, -1)); // One row up, one column left
+            possibleMoves.Add(new Coordinates2D(-1, 1)); // One row down, one column right
+            possibleMoves.Add(new Coordinates2D(-1, -1)); // One row down, one column left
 
             return possibleMoves;
         }

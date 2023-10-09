@@ -27,7 +27,7 @@ namespace ChessLib.Boards.Chess
 
 
         /// <summary>
-        /// Creates the squares on the board toogling between black and white
+        /// Creates the squares on the board toggling between black and white
         /// </summary>
         private void SetSquaresOnTheBoard()
         {
