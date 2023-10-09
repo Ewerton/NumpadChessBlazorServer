@@ -7,7 +7,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NumpadChessBlazorServer", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChessLib", "ChessLib\ChessLib.csproj", "{6D1745F5-D0A2-4409-97DE-7408B286FBAF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NumpadChessUnitTests", "NumpadChessUnitTests\NumpadChessUnitTests.csproj", "{9BF021C7-C652-4EF6-8733-D145CD05253C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NumpadChessUnitTests", "NumpadChessUnitTests\NumpadChessUnitTests.csproj", "{9BF021C7-C652-4EF6-8733-D145CD05253C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0D65B245-156D-4AEA-AE00-201836653689}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
