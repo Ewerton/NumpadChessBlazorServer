@@ -12,6 +12,9 @@ namespace ChessLib.Boards.Chess
     {
         public ChessBoard() : base(8, 8)
         {
+            // I create this chess board just to test if the base classes are working properly and to 
+            // provide a proof of concept of how to use them to create any board game
+
             InitializeBoard();
         }
 

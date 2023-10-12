@@ -10,11 +10,14 @@ using System.Threading.Tasks;
 
 namespace ChessLib.Games
 {
+    /// <summary>
+    /// Holds the logic for the Numpad Chess game
+    /// </summary>
     public class NumpadChessGame
     {
         public event EventHandler<string> OnNewNumberDiscovered;
 
-        public readonly NumpadBoard GameBoard;// { get; set; }
+        public readonly NumpadBoard GameBoard;
 
         public ChessPiece? SelectedChessPiece { get; private set; }
         public int PhoneNumberSize  { get; private set; }

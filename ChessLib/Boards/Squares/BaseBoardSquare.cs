@@ -7,9 +7,16 @@ using System.Threading.Tasks;
 
 namespace ChessLib.Boards.Squares
 {
+    /// <summary>
+    /// Represents an indvidual square on the board.
+    /// </summary>
     public abstract class BaseBoardSquare : IBoardSquare
     {
         public Coordinates2D Coordinates { get; set; } = new(0,0);
+        
+        /// <summary>
+        /// Will hold the contents of the square, it can be a chess piece or anything which implement IPiece
+        /// </summary>
         public virtual IPiece? SquareContent { get; set; }
 
         public BaseBoardSquare(int row, int col)

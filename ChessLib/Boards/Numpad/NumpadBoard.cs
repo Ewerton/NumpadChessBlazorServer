@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace ChessLib.Boards.Numpad
 {
+    /// <summary>
+    /// Represents a cellphone numpad board
+    /// </summary>
     public class NumpadBoard : BaseBoard<NumpadBoardSquare>, IBoard<NumpadBoardSquare>
     {
         public NumpadBoard() : base(4, 3)

@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace ChessLib.Boards.Squares.Numpad
 {
+    /// <summary>
+    /// Represents an indvidual numpad button (square).
+    /// </summary>
     public class NumpadBoardSquare : BaseBoardSquare, IBoardSquare
     {
         public string Text { get; set; }

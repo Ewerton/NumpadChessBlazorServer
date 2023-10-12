@@ -16,6 +16,11 @@ namespace ChessLib.Boards
 
         public T this[int row, int col] { get; set; }
 
+        /// <summary>
+        /// Get the current coordinates of a square on the board.
+        /// </summary>
+        /// <param name="square"></param>
+        /// <returns></returns>
         Coordinates2D? GetCoordinatesOf(T square);
     }
 

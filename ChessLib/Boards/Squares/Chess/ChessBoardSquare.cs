@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace ChessLib.Boards.Squares.Chess
 {
+    /// <summary>
+    /// Represents an indvidual chess board square.
+    /// </summary>
     public class ChessBoardSquare : BaseBoardSquare, IBoardSquare
     {
         public ChessBoardSquareColor Color { get; set; }

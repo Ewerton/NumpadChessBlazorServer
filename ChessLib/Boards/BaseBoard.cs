@@ -11,12 +11,13 @@ using System.Threading.Tasks;
 
 namespace ChessLib.Boards
 {
+
     public abstract class BaseBoard<TBoardSquare> : IBoard<TBoardSquare> where TBoardSquare : IBoardSquare
     {
         public readonly int _rowCount = 0;
         public readonly int _colCount = 0;
 
-        public readonly TBoardSquare[,] board; // using an generic array to reuse this base class to any derived board whit any piece which implements IPiece.
+        public readonly TBoardSquare[,] board; // using an generic array to reuse this base class to any derived board with any square type which implements IBoardSquare.
 
         public BaseBoard(int rowCount, int colCount)
         {
