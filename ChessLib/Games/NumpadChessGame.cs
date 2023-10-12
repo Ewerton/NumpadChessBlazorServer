@@ -65,7 +65,7 @@ namespace ChessLib.Games
 
         private void GeneratePhoneNumbers(string currentNumber, Coordinates2D currentSquare, List<string> phoneNumbers)
         {
-            if (currentNumber.Length == 7)
+            if (currentNumber.Length == PhoneNumberSize)
             {
                 if (!PhoneNumbers.Contains(currentNumber))
                 {

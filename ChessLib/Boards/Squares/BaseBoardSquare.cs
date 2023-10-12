@@ -15,7 +15,7 @@ namespace ChessLib.Boards.Squares
         public Coordinates2D Coordinates { get; set; } = new(0,0);
         
         /// <summary>
-        /// Will hold the contents of the square, it can be a chess piece or anything which implement IPiece
+        /// Will hold the contents of the square, it can be a chess, checkers or any other piece which implement IPiece
         /// </summary>
         public virtual IPiece? SquareContent { get; set; }
 
