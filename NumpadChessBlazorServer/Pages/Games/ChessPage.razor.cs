@@ -7,7 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace NumpadChessBlazorServer.Pages
+namespace NumpadChessBlazorServer.Pages.Games
 {
     public partial class ChessPage : ComponentBase
     {

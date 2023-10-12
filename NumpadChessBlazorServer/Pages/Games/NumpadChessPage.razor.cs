@@ -15,7 +15,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Xml.Linq;
 
-namespace NumpadChessBlazorServer.Pages
+namespace NumpadChessBlazorServer.Pages.Games
 {
     public partial class NumpadChessPage : ComponentBase
     {
@@ -53,7 +53,7 @@ namespace NumpadChessBlazorServer.Pages
 
         System.Timers.Timer TimerUpdateGameLog = new System.Timers.Timer();
 
-        string strGameLogTemp = String.Empty;
+        string strGameLogTemp = string.Empty;
         protected override async Task OnInitializedAsync()
         {
             try
@@ -123,7 +123,7 @@ namespace NumpadChessBlazorServer.Pages
                 // Calls the recursive method to find the phone numbers
                 List<string> discoveredPhoneNumbers = await Task.Run(() => game.GetUniquePhoneNumbers(SelectedChessPieceType, StartingPoint, PhoneNumberLenght));
 
-                string endingMessge = String.Empty;
+                string endingMessge = string.Empty;
 
                 if (discoveredPhoneNumbers.Count > 0)
                     endingMessge = $"Game finished. {discoveredPhoneNumbers.Count} unique phone numbers found.";
@@ -208,8 +208,8 @@ namespace NumpadChessBlazorServer.Pages
 
         private async Task ClearGameLog()
         {
-            GameLog = String.Empty;
-            strGameLogTemp = String.Empty;
+            GameLog = string.Empty;
+            strGameLogTemp = string.Empty;
             StateHasChanged();
         }
 
