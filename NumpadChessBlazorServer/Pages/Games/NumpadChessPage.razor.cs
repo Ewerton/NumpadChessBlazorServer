@@ -107,12 +107,9 @@ namespace NumpadChessBlazorServer.Pages.Games
                 await ClearGameLog();
 
 
+                // Initializing the game
                 NumpadBoard gameBoard = board as NumpadBoard;
                 NumpadChessGame game = new NumpadChessGame(gameBoard);
-
-                await UpdateGameLog($"Starting game at number {gameBoard[StartingPoint.Row, StartingPoint.Col].Text} (row:{StartingPoint.Row}, col:{StartingPoint.Col}) for {SelectedChessPieceType.ToString()} piece ...");
-                await ScrollToGameLogTop();
-
 
                 // Event handler to update the game log
                 game.OnNewNumberDiscovered += async (sender, newNumber) =>
@@ -120,7 +117,12 @@ namespace NumpadChessBlazorServer.Pages.Games
                     strGameLogTemp = strGameLogTemp + $"New number discovered: {newNumber}" + Environment.NewLine;
                 };
 
-                // Calls the recursive method to find the phone numbers
+
+                await UpdateGameLog($"Starting game at number {gameBoard[StartingPoint.Row, StartingPoint.Col].Text} (row:{StartingPoint.Row}, col:{StartingPoint.Col}) for {SelectedChessPieceType.ToString()} piece ...");
+                await ScrollToGameLogTop();
+              
+
+                // Running the game
                 List<string> discoveredPhoneNumbers = await Task.Run(() => game.GetUniquePhoneNumbers(SelectedChessPieceType, StartingPoint, PhoneNumberLenght));
 
                 string endingMessge = string.Empty;
